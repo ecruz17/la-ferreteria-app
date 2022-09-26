@@ -127,7 +127,7 @@ export default class App extends React.Component {
   }
 
   putRequest = () => {
-    axiosInstance.put('/products/' + this.state.form.id, this.state.form)
+    axiosInstance.put(`/products/${this.state.form.id}`, this.state.form)
       .then(response => {
         this.showSuccessModal('actualizó');
         this.handleModalUpdate();
@@ -137,7 +137,7 @@ export default class App extends React.Component {
   }
 
   deleteRequest = () => {
-    axiosInstance.delete('/products/' + this.state.form.id)
+    axiosInstance.delete(`/products/${this.state.form.id}`)
       .then(response => {
         this.setState({ modalDelete: false });
         this.showSuccessModal('eliminó');
