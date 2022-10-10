@@ -21,6 +21,14 @@ footer {
   padding: 1rem;
 }
 
+#navbar_anchor {
+  font-weight: bold;
+}
+#navbar_anchor2 {
+  font-weight: bold;
+    margin-right: 4rem;
+}
+
 #container {
   position: relative;
   text-align: center;
@@ -69,14 +77,26 @@ footer {
     background-color: #131313;
 }
 
+#col_brand {
+  margin-right: -18px;
+}
+
 #navBarMain {
   background-color: #000000;
   color: #DAC8B0;
 }
 
-.navbar-brand {
+#navBarTitle {
   font-weight: bolder;
   color: #DAC8B0;
+}
+
+#row-brand {
+  flex-wrap: nowrap;
+}
+
+#col_navbar_a {
+  width: 0;
 }
 
 #products-header {

@@ -2,20 +2,20 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import '../index.css';
 
-const Navbar = () => {
+const Navbar = (props) => {
     return (
         <>
-            <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-                <div className="navbar-brand">
-                    <img src="https://i.imgur.com/VpNAWHU.png" width="40" height="40" className="d-inline-block align-top" alt="" />
-                    La Ferretería
+            <nav id="navBarMain" class="navbar navbar-expand-lg sticky-top justify-content-between">
+                <div className="row">
+                    <div id="col_brand" className="col-4">
+                        <img src="https://i.imgur.com/VpNAWHU.png" width="40" height="40" alt="logo" />
+                    </div>
+                    <div className="col-8 d-none d-md-block align-items-center">
+                        <a id="navBarTitle" class="navbar-brand" href="#!">La Ferretería</a>
+                    </div>
                 </div>
-
-                <ul id="centerNavbarText" className="navbar-nav">
-                    <li className="nav-item active">
-                        <a className="nav-link" href="#products-header">Productos</a>
-                    </li>
-                </ul>
+                <a id="navbar_anchor" className="nav-link" href="#!" onClick={() => props.changeView('product')}>Productos</a>
+                <a id="navbar_anchor2" className="nav-link" href="#!" onClick={() => props.changeView('provider')}>Proveedores</a>
             </nav>
         </>
     );
