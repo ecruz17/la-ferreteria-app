@@ -1,30 +1,30 @@
 self.__precacheManifest = [
   {
-    "revision": "dcfd3584a5c46385fbdc",
-    "url": "/la-ferreteria-app/static/css/main.d9d697d0.chunk.css"
+    "revision": "33a9f761f169cc9e9b37",
+    "url": "/la-ferreteria-app/static/css/main.8700b93f.chunk.css"
   },
   {
-    "revision": "dcfd3584a5c46385fbdc",
-    "url": "/la-ferreteria-app/static/js/main.dcfd3584.chunk.js"
+    "revision": "33a9f761f169cc9e9b37",
+    "url": "/la-ferreteria-app/static/js/main.33a9f761.chunk.js"
   },
   {
     "revision": "94421d0c55535ff39cc4",
     "url": "/la-ferreteria-app/static/js/1.94421d0c.chunk.js"
   },
   {
-    "revision": "080ba439773c381890fd",
+    "revision": "52780dd66aa361deb726",
     "url": "/la-ferreteria-app/static/css/2.10e0d208.chunk.css"
   },
   {
-    "revision": "080ba439773c381890fd",
-    "url": "/la-ferreteria-app/static/js/2.080ba439.chunk.js"
+    "revision": "52780dd66aa361deb726",
+    "url": "/la-ferreteria-app/static/js/2.52780dd6.chunk.js"
   },
   {
     "revision": "a35fb2aa4d8b3b5c8a27",
     "url": "/la-ferreteria-app/static/js/runtime~main.a35fb2aa.js"
   },
   {
-    "revision": "949bd030402f9f64708c7739a677c6b1",
+    "revision": "0da8a17d79d6dde7a931b5f83db993aa",
     "url": "/la-ferreteria-app/index.html"
   }
 ];
