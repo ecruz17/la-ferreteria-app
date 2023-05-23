@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
 import '../index.css';
 
-function Navbar(props) {
+function NavbarEmployees(props) {
     const navigate = useNavigate();
     return (
         <>
@@ -18,11 +18,10 @@ function Navbar(props) {
                 </div>
                 <button id="navbar_anchor" className="nav-link" onClick={() => props.changeView('product')}>Productos</button>
                 <button id="navbar_anchor2" className="nav-link" onClick={() => props.changeView('provider')}>Proveedores</button>
-                <button id="navbar_anchor" className="nav-link" onClick={() => { navigate('/auth') }}>Autorización de usuarios</button>
                 <button id="navbar_anchor" className="nav-link" onClick={() => { navigate('/') }}>Cerrar Sesión</button>
             </nav>
         </>
     );
 }
 
-export default Navbar;
+export default NavbarEmployees;
