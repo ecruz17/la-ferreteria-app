@@ -3,6 +3,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import { axiosInstance } from '../config';
 import { LoggedInContext } from '../helper/Context';
 
+import "bootstrap/dist/css/bootstrap.min.css";
+import "../login.css"
+
+
 const Login = () => {
 
     const [email, setEmail] = useState('');
@@ -14,7 +18,6 @@ const Login = () => {
         event.preventDefault();
         axiosInstance.post(`/employees/login`, { email: email, password: password })
             .then(data => {
-                console.log(data);
                 if (data.data.status === 400) {
                     alert('El email y la contraseña son requeridos')
                 } else if (data.data.status === 404) {
@@ -36,28 +39,38 @@ const Login = () => {
 
     return (
         <div>
-            <h1>Iniciar Sesión</h1>
-            <form onSubmit={handleSubmit}>
-                <label>Email:</label>
-                <input
-                    type="email"
-                    placeholder='Email'
-                    onChange={(e) => { setEmail(e.target.value) }}
-                />
-
-                <label>Password:</label>
-                <input
-                    type="password"
-                    placeholder='Password'
-                    onChange={(e) => { setPassword(e.target.value) }}
-                />
-
-                <button type="submit">Login</button>
-            </form>
-            <br />
-            <p>O</p>
-            <br />
-            <Link to={"/signup"}>Crear cuenta</Link>
+            <main className="d-flex align-items-center min-vh-100 py-3 py-md-0">
+                <div className="container">
+                    <div className="card login-card">
+                        <div className="row no-gutters">
+                            <div className="card-body">
+                                <img src="https://i.imgur.com/VpNAWHU.png" width="100" height="100" alt="logo" />
+                                <p className="login-card-description">Iniciar sesión</p>
+                                <form onSubmit={handleSubmit}>
+                                    <div className="form-group">
+                                        <label className="sr-only">Email</label>
+                                        <input
+                                            type="email" name="email" id="email" className="form-control"
+                                            placeholder='Email'
+                                            onChange={(e) => { setEmail(e.target.value) }}
+                                        />
+                                    </div>
+                                    <div className="form-group mb-4">
+                                        <label className="sr-only">Contraseña</label>
+                                        <input type="password" name="password" id="password" className="form-control" placeholder="***********"
+                                            onChange={(e) => { setPassword(e.target.value) }}
+                                        />
+                                    </div>
+                                    <input name="login" id="login" className="btn btn-block login-btn mb-4" type="submit" value="Iniciar sesión" />
+                                </form>
+                                <a href="/oops" className="forgot-password-link">¿Olvidaste tu contraseña?</a>
+                                <br />
+                                <Link className='text-reset' to={"/signup"}>Crea una cuenta aquí</Link>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
         </div >
     );
 }

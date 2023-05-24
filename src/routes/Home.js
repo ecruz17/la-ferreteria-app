@@ -1,6 +1,5 @@
 import React from "react";
 import { axiosInstance } from "../config";
-// import { useLocation, useNavigate } from "react-router-dom";
 import "../App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -57,15 +56,6 @@ export default class Home extends React.Component {
         }
     };
 
-    // constructor(props) {
-    //     super(props)
-    //     this.myRef = React.createRef();
-    // }
-
-    // scrollToProducts(event) {
-    //     sessionStorage.setItem("reloading", "true");
-    //     window.scrollTo(0, this.myRef.current.offsetTop);
-    // }
 
     resetForm = () => {
         this.setState({ form: initialForm });
