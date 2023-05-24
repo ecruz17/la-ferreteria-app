@@ -7,13 +7,27 @@ import AddProductBtn from "../components/add_product_btn";
 import NavbarEmployees from "../components/navbar_employee";
 import AddProviderBtn from "../components/add_provider_btn";
 
+const initialFormEmployee = {
+    id: '',
+    email: '' 
+}
 
 export default class Employees extends React.Component {
 
     state = {
         data: [],
         providers: [],
+        modalEmployeeDelete: false,
     };
+
+    deleteEmployee = () => {
+        axiosInstance.delete(`/employees/${this.employeesForm.id}`)
+        .then(response => {
+            this.setState({ modalEmployeeDelete: false });
+                this.showSuccessModal('empleado', 'eliminó');
+                this.getEmployees();
+        })
+    }
 
     handleBtnType = (type) => {
         this.setState({ btnType: type })
@@ -141,6 +155,7 @@ export default class Employees extends React.Component {
     }
 
     render() {
+        const { form, employeesForm } = this.state;
         return (
             <div className="homepage">
                 <NavbarEmployees changeView={this.handleBtnType} />
@@ -158,6 +173,17 @@ export default class Employees extends React.Component {
                         </div>
                     </div>
                 </div>
+
+                <Modal isOpen={this.state.modalEmployeeDelete}>
+                                <ModalBody style={{ display: 'block', textAlign: 'center' }}>
+                                    <h3>¿Estás seguro de que deseas eliminar el empleado?: </h3>
+                                    <h2>{employeesForm && employeesForm.name.toUpperCase()}</h2>
+                                </ModalBody>
+                                <ModalFooter style={{ display: 'block', textAlign: 'center' }}>
+                                    <button className="btn btn-success" onClick={() => this.deleteEmployee()}>Muy seguro</button>
+                                    <button className="btn btn-danger" onClick={() => this.handleModalProvDelete()}>Aún no</button>
+                                </ModalFooter>
+                            </Modal>
                 <footer>
                     <span>{`© ℗®™ to Emir Cruz Maldonado & Alejandro López Castrejón`}</span>
                 </footer>
