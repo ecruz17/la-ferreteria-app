@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import { LoggedInContext } from './helper/Context';
 
 import Home from "./routes/Home";
@@ -13,7 +13,6 @@ import ProtectedRoutes from "./ProtectedRoutes";
 
 const App = () => {
   const [loggedIn, setLoggedIn] = useState(false);
-  console.log(loggedIn);
   return (
     <div className="App">
       <LoggedInContext.Provider value={{ loggedIn, setLoggedIn }}>
