@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { axiosInstance } from "../config";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrashAlt, faCheck, faCancel } from '@fortawesome/free-solid-svg-icons';
+import { faTrashAlt, faCheck, faCancel, faClose } from '@fortawesome/free-solid-svg-icons';
 import "../App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
+import { Modal, ModalHeader, ModalFooter } from 'reactstrap';
 
 function Auth() {
 
     const [users, setUsers] = useState([]);
     const [employees, setEmployees] = useState([]);
+    const [modal, setModal] = useState(false);
+    const [modalDelete, setModalDelete] = useState(false);
+    const [modalEmployee, setModalEmployee] = useState(false);
 
     const fetchData = async () => {
         try {
@@ -30,6 +34,7 @@ function Auth() {
         axiosInstance.delete(`/users/${id}`)
             .then(response => {
                 alert('Usuario eliminado');
+                setModal(false);
                 fetchData();
             })
     }
@@ -37,7 +42,8 @@ function Auth() {
     const handleDeauth = (id) => {
         axiosInstance.delete(`/employees/${id}`)
             .then(response => {
-                alert('Empleado eliminado');
+                alert(`Usuario desautorizado`);
+                setModalEmployee(false);
                 fetchData();
             })
     }
@@ -46,6 +52,7 @@ function Auth() {
         axiosInstance.post(`/employees`, user)
             .then(response => {
                 alert(`Usuario ${user.email} autorizado`);
+                setModal(false);
                 handleDelete(user._id);
                 fetchData();
             });
@@ -82,17 +89,42 @@ function Auth() {
                                             <td>{user._id.substring(0, 6)}</td>
                                             <td>{(user.email)}</td>
                                             <td>
-                                                <button id="btn-authorize" className="btn btn-primary" onClick={() => handleAuthorize(user)}>
+                                                <button id="btn-authorize" className="btn btn-primary" onClick={() => setModal(true)}>
                                                     <FontAwesomeIcon icon={faCheck} />
                                                 </button>
                                                 {"  "}
-                                                <button id="#btn-trash" className="btn btn-danger" onClick={() => handleDelete(user._id)}>
+                                                <button id="#btn-trash" className="btn btn-danger" onClick={() => setModalDelete(true)}>
                                                     <FontAwesomeIcon icon={faCancel} />
                                                 </button>
                                             </td>
                                         </tr>
+                                        <Modal isOpen={modal}>
+                                            <ModalHeader style={{ display: 'block' }}>
+                                                <h2 id="table-header-text" style={{ float: 'left' }}>¿Estás seguro que quieres autorizar al usuario {user.email}?</h2>
+                                                <button className="btn btn-danger" style={{ float: 'right' }} onClick={() => setModal(false)}>
+                                                    <FontAwesomeIcon icon={faClose} />
+                                                </button>
+                                            </ModalHeader>
+                                            <ModalFooter style={{ display: 'block', textAlign: 'center' }}>
+                                                <button className="btn btn-success" onClick={() => handleAuthorize(user)}>Aceptar</button>
+                                                <button className="btn btn-danger" onClick={() => setModal(false)}>Cancelar</button>
+                                            </ModalFooter>
+                                        </Modal>
+                                        <Modal isOpen={modalDelete}>
+                                            <ModalHeader style={{ display: 'block' }}>
+                                                <h2 id="table-header-text" style={{ float: 'left' }}>¿Estás seguro que quieres eliminar al usuario {user.email}?</h2>
+                                                <button className="btn btn-danger" style={{ float: 'right' }} onClick={() => setModalDelete(false)}>
+                                                    <FontAwesomeIcon icon={faClose} />
+                                                </button>
+                                            </ModalHeader>
+                                            <ModalFooter style={{ display: 'block', textAlign: 'center' }}>
+                                                <button className="btn btn-success" onClick={() => handleDelete(user._id)}>Aceptar</button>
+                                                <button className="btn btn-danger" onClick={() => setModal(false)}>Cancelar</button>
+                                            </ModalFooter>
+                                        </Modal>
                                     </>
                                 );
+
                             })}
                         </tbody>
                     </table>
@@ -120,20 +152,33 @@ function Auth() {
                         </thead>
                         <tbody>
                             {employees.map(employee => {
-                                return (
+                                return employee.role === '2' ? (
                                     <>
                                         <tr id="users-tr">
                                             <td>{employee._id.substring(0, 6)}</td>
                                             <td>{(employee.email)}</td>
                                             <td>
-                                                <button id="#btn-trash" className="btn btn-secondary" onClick={() => handleDeauth(employee._id)}>
+                                                <button id="#btn-trash" className="btn btn-secondary" onClick={() => setModalEmployee(true)}>
                                                     <FontAwesomeIcon icon={faTrashAlt} />
                                                 </button>
                                             </td>
                                         </tr>
+                                        <Modal isOpen={modalEmployee}>
+                                            <ModalHeader style={{ display: 'block' }}>
+                                                <h2 id="table-header-text" style={{ float: 'left' }}>¿Estás seguro que quieres desautorizar al empleado {employee.email}?</h2>
+                                                <button className="btn btn-danger" style={{ float: 'right' }} onClick={() => setModalEmployee(false)}>
+                                                    <FontAwesomeIcon icon={faClose} />
+                                                </button>
+                                            </ModalHeader>
+                                            <ModalFooter style={{ display: 'block', textAlign: 'center' }}>
+                                                <button className="btn btn-success" onClick={() => handleDeauth(employee._id)}>Aceptar</button>
+                                                <button className="btn btn-danger" onClick={() => setModalEmployee(false)}>Cancelar</button>
+                                            </ModalFooter>
+                                        </Modal>
                                     </>
-                                );
-                            })}
+                                ) : <div></div>
+                            })
+                            }
                         </tbody>
                     </table>
                 </div>
