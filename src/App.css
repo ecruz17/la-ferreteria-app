@@ -44,3 +44,14 @@
     transform: translate(-50%, -50%);
     width: 80%;
 }
+
+.meme-container {
+  margin-left: auto;  
+  margin-right: auto;
+  margin-top: 20px;  
+  max-height: 20rem;
+}
+
+.btns-holder {
+  position: relative;
+}
