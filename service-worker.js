@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/la-ferreteria-app/precache-manifest.399dd94b31d3bcead686577959468b42.js"
+  "/la-ferreteria-app/precache-manifest.f5aa19cc57c488081bf3666c5458be71.js"
 );
 
 workbox.clientsClaim();
