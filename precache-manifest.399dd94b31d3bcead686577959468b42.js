@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "120116844db54bb70020",
+    "revision": "8bc148f546b42401807c",
     "url": "/la-ferreteria-app/static/css/main.de1910e8.chunk.css"
   },
   {
-    "revision": "120116844db54bb70020",
-    "url": "/la-ferreteria-app/static/js/main.12011684.chunk.js"
+    "revision": "8bc148f546b42401807c",
+    "url": "/la-ferreteria-app/static/js/main.8bc148f5.chunk.js"
   },
   {
     "revision": "128fd6128b9459c5ab86",
@@ -24,7 +24,7 @@ self.__precacheManifest = [
     "url": "/la-ferreteria-app/static/js/runtime~main.1792e1e7.js"
   },
   {
-    "revision": "67ae62ea884704d10fa052d16d5844dd",
+    "revision": "7a040020aacd91c43a1548f3d1747bdb",
     "url": "/la-ferreteria-app/index.html"
   }
 ];
