@@ -7,6 +7,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
 import { Modal, ModalHeader, ModalFooter } from 'reactstrap';
 
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+
+const MySwal = withReactContent(Swal);
+
 function Auth() {
 
     const [users, setUsers] = useState([]);
@@ -26,23 +31,33 @@ function Auth() {
         }
     };
 
+    const showSuccessModal = (type, action) => {
+        MySwal.fire({
+            title: <strong>¡Listo!</strong>,
+            html: <i>El usuario: {type} se ha {action} con éxito</i>,
+            icon: 'success'
+        });
+    }
+
     useEffect(() => {
         fetchData();
     }, []);
 
-    const handleDelete = (id) => {
+    const handleDelete = (id, user, showModal) => {
         axiosInstance.delete(`/users/${id}`)
             .then(response => {
-                alert('Usuario eliminado');
-                setModal(false);
+                if (showModal) {
+                    showSuccessModal(user, 'eliminado');
+                }
+                setModalDelete(false);
                 fetchData();
             })
     }
 
-    const handleDeauth = (id) => {
+    const handleDeauth = (id, employee) => {
         axiosInstance.delete(`/employees/${id}`)
             .then(response => {
-                alert(`Usuario desautorizado`);
+                showSuccessModal(employee, 'desautorizado');
                 setModalEmployee(false);
                 fetchData();
             })
@@ -51,9 +66,9 @@ function Auth() {
     const handleAuthorize = (user) => {
         axiosInstance.post(`/employees`, user)
             .then(response => {
-                alert(`Usuario ${user.email} autorizado`);
+                handleDelete(user._id, user.email, false);
                 setModal(false);
-                handleDelete(user._id);
+                showSuccessModal(user.email, 'autorizado');
                 fetchData();
             });
     }
@@ -118,8 +133,8 @@ function Auth() {
                                                 </button>
                                             </ModalHeader>
                                             <ModalFooter style={{ display: 'block', textAlign: 'center' }}>
-                                                <button className="btn btn-success" onClick={() => handleDelete(user._id)}>Aceptar</button>
-                                                <button className="btn btn-danger" onClick={() => setModal(false)}>Cancelar</button>
+                                                <button className="btn btn-success" onClick={() => handleDelete(user._id, user.email, true)}>Aceptar</button>
+                                                <button className="btn btn-danger" onClick={() => setModalDelete(false)}>Cancelar</button>
                                             </ModalFooter>
                                         </Modal>
                                     </>
@@ -171,7 +186,7 @@ function Auth() {
                                                 </button>
                                             </ModalHeader>
                                             <ModalFooter style={{ display: 'block', textAlign: 'center' }}>
-                                                <button className="btn btn-success" onClick={() => handleDeauth(employee._id)}>Aceptar</button>
+                                                <button className="btn btn-success" onClick={() => handleDeauth(employee._id, employee.email)}>Aceptar</button>
                                                 <button className="btn btn-danger" onClick={() => setModalEmployee(false)}>Cancelar</button>
                                             </ModalFooter>
                                         </Modal>
