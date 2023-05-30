@@ -63,7 +63,7 @@ const Login = () => {
                                     </div>
                                     <input name="login" id="login" className="btn btn-block login-btn mb-4" type="submit" value="Iniciar sesión" />
                                 </form>
-                                <a href="/#/oops" className="forgot-password-link">¿Olvidaste tu contraseña?</a>
+                                <Link className="forgot-password-link" to={"/oops"}>¿Olvidaste tu contraseña?</Link>
                                 <br />
                                 <Link className='text-reset' to={"/signup"}>Crea una cuenta aquí</Link>
                             </div>
